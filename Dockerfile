@@ -1,5 +1,9 @@
-FROM centos:7
-RUN yum install -y procps
+FROM alpine:3.5
+RUN apk add openconnect --no-cache  --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+
+#FROM centos:7
+#RUN yum install -y procps
+
 ADD anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh /anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh
 RUN chmod +x anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh && ./anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh --yes
 ADD entrypoint.sh /entrypoint.sh

@@ -3,7 +3,7 @@ version: '3'
 services:
   vpn:
     container_name: vpn
-    image: igor-podpalchenko/vpn-anyconnect-docker
+    image: jetbrainsinfra/docker-anyconnect-vpn
     environment:
       - ANYCONNECT_SERVER=${ANYCONNECT_SERVER}
       - ANYCONNECT_USER=${ANYCONNECT_USER}
@@ -17,7 +17,7 @@ services:
     security_opt:
       - label:disable
     dns: 8.8.8.8
-    dns_search: ${DNS_SUFFIX}
+#   dns_search: ${DNS_SUFFIX}
     dns_opt:
       - ndots:1
   
@@ -29,3 +29,4 @@ services:
     depends_on:
       - vpn
     network_mode: "service:vpn"
+
