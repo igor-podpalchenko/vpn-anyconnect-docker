@@ -1,2 +1,3 @@
 #!/bin/sh
-( echo $ANYCONNECT_USER; echo $ANYCONNECT_PASSWORD; echo $ANYCONNECT_PASSWORD; echo yes; ) | /opt/cisco/anyconnect/bin/vpn -s connect $ANYCONNECT_SERVER &>/dev/null
+#while true; do sleep 30; done;
+( echo $ANYCONNECT_PASSWORD; echo $ANYCONNECT_PASSWORD; ) | openconnect $ANYCONNECT_SERVER --user=$ANYCONNECT_USER --passwd-on-stdin --timestamp

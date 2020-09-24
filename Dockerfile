@@ -1,11 +1,5 @@
-FROM alpine:3.5
-RUN apk add openconnect --no-cache  --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
-
-#FROM centos:7
-#RUN yum install -y procps
-
-ADD anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh /anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh
-RUN chmod +x anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh && ./anyconnect-linux64-4.6.01103-core-vpn-webdeploy-k9.sh --yes
+FROM centos:7
+RUN yum install -y epel-release && yum install --enablerepo=epel -y openconnect vpnc procps net-tools which
 ADD entrypoint.sh /entrypoint.sh
 HEALTHCHECK  --interval=10s --timeout=10s --start-period=10s \
   CMD /sbin/ifconfig tun0

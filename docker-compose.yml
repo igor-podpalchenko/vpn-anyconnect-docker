@@ -2,8 +2,10 @@ version: '3'
 
 services:
   vpn:
+    image: podpalch/vpn-anyconnect-docker
     container_name: vpn
-    image: jetbrainsinfra/docker-anyconnect-vpn
+    build:
+      context: .
     environment:
       - ANYCONNECT_SERVER=${ANYCONNECT_SERVER}
       - ANYCONNECT_USER=${ANYCONNECT_USER}
@@ -17,16 +19,16 @@ services:
     security_opt:
       - label:disable
     dns: 8.8.8.8
-#   dns_search: ${DNS_SUFFIX}
+    dns_search: ${DNS_SUFFIX}
     dns_opt:
       - ndots:1
   
-  packer:
-    container_name: packer
-    image: alpine
-    tty: true
-    entrypoint: /bin/sleep 10
-    depends_on:
-      - vpn
-    network_mode: "service:vpn"
+#  packer:
+#    container_name: packer
+#    image: alpine
+#    tty: true
+#    entrypoint: /bin/sleep 10
+#    depends_on:
+#      - vpn
+#    network_mode: "service:vpn"
 
